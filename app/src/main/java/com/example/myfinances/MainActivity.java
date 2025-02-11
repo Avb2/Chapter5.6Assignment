@@ -1,6 +1,9 @@
 package com.example.myfinances;
 
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +24,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+
 }
