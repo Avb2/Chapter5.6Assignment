@@ -1,19 +1,19 @@
-package com.example.myfinances.helpers;
+package com.example.myfinances.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myfinances.databases.CheckingDb;
+import com.example.myfinances.databases.DbHelper;
 import com.example.myfinances.models.CheckingAccount;
 
 public class CheckingData {
     private SQLiteDatabase db;
-    private CheckingDb checkingDb;
+    private DbHelper checkingDb;
 
     public CheckingData(Context context){
-        checkingDb = new CheckingDb(context);
+        checkingDb = new DbHelper(context);
     }
 
 

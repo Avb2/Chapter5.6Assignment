@@ -1,6 +1,5 @@
 package com.example.myfinances;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -9,19 +8,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.myfinances.databases.CdDb;
-import com.example.myfinances.databases.CheckingDb;
-import com.example.myfinances.databases.LoanDb;
-import com.example.myfinances.helpers.CdData;
-import com.example.myfinances.helpers.CheckingData;
-import com.example.myfinances.helpers.LoanData;
+import com.example.myfinances.data.CdData;
+import com.example.myfinances.data.CheckingData;
+import com.example.myfinances.data.LoanData;
 import com.example.myfinances.models.Cd;
 import com.example.myfinances.models.CheckingAccount;
 import com.example.myfinances.models.Loan;

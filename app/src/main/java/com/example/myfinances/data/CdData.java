@@ -1,20 +1,19 @@
-package com.example.myfinances.helpers;
+package com.example.myfinances.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.myfinances.databases.CdDb;
+import com.example.myfinances.databases.DbHelper;
 import com.example.myfinances.models.Cd;
 public class CdData {
-    private CdDb dbHelper;
+    private DbHelper dbHelper;
     private SQLiteDatabase db;
 
     public CdData(Context context) {
         /// Creates Db
-        dbHelper = new CdDb(context);
+        dbHelper = new DbHelper(context);
     }
 
     public void open() throws SQLException {

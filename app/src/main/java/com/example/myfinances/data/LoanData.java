@@ -1,20 +1,20 @@
-package com.example.myfinances.helpers;
+package com.example.myfinances.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myfinances.databases.LoanDb;
+import com.example.myfinances.databases.DbHelper;
 import com.example.myfinances.models.Loan;
 
 public class LoanData {
     private SQLiteDatabase db;
-    private LoanDb loanDb;
+    private DbHelper loanDb;
 
 
     public LoanData(Context context){
-        this.loanDb = new LoanDb(context);
+        this.loanDb = new DbHelper(context);
     }
 
 
@@ -29,11 +29,13 @@ public class LoanData {
     public void insertVals(Loan loan) throws SQLException{
         try {
             ContentValues vals = new ContentValues();
-            vals.put("accountnumber", loan.getAccountNumber());
             vals.put("initialbalance", loan.getInitialBalance());
             vals.put("currentbalance", loan.getCurrentBalance());
+            vals.put("accountnumber", loan.getAccountNumber());
             vals.put("interestrate", loan.getInterestRate());
             vals.put("paymentamount", loan.getPaymentAmount());
+
+
 
             this.db.insert("loan", null, vals);
         } catch (Exception e) {
