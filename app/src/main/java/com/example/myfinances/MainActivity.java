@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                         );
                         /// Handles data management (inserts)
                         CdDb cdDbHelper = new CdDb(MainActivity.this);
+
                         cdDbHelper.open();
                         cdDbHelper.insertVals(cd);
                         cdDbHelper.close();

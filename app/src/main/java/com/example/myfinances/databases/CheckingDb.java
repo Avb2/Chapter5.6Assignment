@@ -17,7 +17,6 @@ public class CheckingDb extends SQLiteOpenHelper {
             "currentbalance real not null);";
 
 
-    private SQLiteDatabase db;
     public CheckingDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -32,26 +31,5 @@ public class CheckingDb extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS checking");
     }
 
-
-
-
-    public void open() throws SQLException {
-        this.db = this.getWritableDatabase();
-    }
-
-    public void close() throws SQLException {
-        this.db.close();
-    }
-
-    public void insertVals(CheckingAccount checkingAccount) throws SQLException {
-        try {
-            ContentValues vals = new ContentValues();
-            vals.put("accountbalance", checkingAccount.getAccountNumber());
-            vals.put("currentbalance", checkingAccount.getCurrentBalance());
-            this.db.insert("checking", null, vals);
-        } catch (Exception e) {
-            System.out.println("Error with checking db");
-        }
-    }
 
 }

@@ -19,8 +19,6 @@ public class LoanDb extends SQLiteOpenHelper{
             "paymentamount real not null);";
 
 
-    private SQLiteDatabase db;
-
     public LoanDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -33,31 +31,6 @@ public class LoanDb extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS loan");
-    }
-
-
-
-    public void open() throws SQLException {
-        this.db = this.getWritableDatabase();
-    }
-
-    public void close() throws SQLException {
-        this.db.close();
-    }
-
-    public void insertVals(Loan loan) throws SQLException{
-        try {
-            ContentValues vals = new ContentValues();
-            vals.put("initialbalance", loan.getInitialBalance());
-            vals.put("currentbalance", loan.getCurrentBalance());
-            vals.put("initialbalance", loan.getInitialBalance());
-            vals.put("interestrate", loan.getInterestRate());
-            vals.put("paymentamount", loan.getPaymentAmount());
-
-            this.db.insert("loans", null, vals);
-        } catch (Exception e) {
-            System.out.println("Error with loan db");
-        }
     }
 
 }
