@@ -28,7 +28,7 @@ public class CheckingData {
     public void insertVals(CheckingAccount checkingAccount) throws SQLException {
         try {
             ContentValues vals = new ContentValues();
-            vals.put("accountbalance", checkingAccount.getAccountNumber());
+            vals.put("accountnumber", checkingAccount.getAccountNumber());
             vals.put("currentbalance", checkingAccount.getCurrentBalance());
             this.db.insert("checking", null, vals);
         } catch (Exception e) {
