@@ -9,11 +9,11 @@ public class CdDb extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "myFinance.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS cd (" +
-            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "accountnumber INTEGER NOT NULL, " +
-            "initialbalance REAL NOT NULL, " +
-            "currentbalance REAL NOT NULL, " +
-            "interestrate REAL NOT NULL);";
+            "_id integer primary key autoincrement, " +
+            "accountnumber integer not null, " +
+            "initialbalance real not null, " +
+            "currentbalance real not null, " +
+            "interestrate real not null);";
 
     public CdDb(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

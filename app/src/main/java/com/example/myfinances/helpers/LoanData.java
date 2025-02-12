@@ -29,13 +29,13 @@ public class LoanData {
     public void insertVals(Loan loan) throws SQLException{
         try {
             ContentValues vals = new ContentValues();
+            vals.put("accountnumber", loan.getAccountNumber());
             vals.put("initialbalance", loan.getInitialBalance());
             vals.put("currentbalance", loan.getCurrentBalance());
-            vals.put("initialbalance", loan.getInitialBalance());
             vals.put("interestrate", loan.getInterestRate());
             vals.put("paymentamount", loan.getPaymentAmount());
 
-            this.db.insert("loans", null, vals);
+            this.db.insert("loan", null, vals);
         } catch (Exception e) {
             System.out.println("Error with loan db");
         }

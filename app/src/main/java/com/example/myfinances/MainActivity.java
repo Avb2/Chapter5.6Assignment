@@ -1,6 +1,7 @@
 package com.example.myfinances;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -149,34 +151,48 @@ public class MainActivity extends AppCompatActivity {
                         cdData.open();
                         cdData.insertVals(cd);
                         cdData.close();
-
+                        alert();
+                        clearText();
                     } catch (Exception e) {
                         System.out.println("Error with cd db");
                     }
-                } else if (loanButton.isChecked()) {
-                    Loan loan = new Loan(
-                            accountNumber,
-                            initialbalance,
-                            currentBalance,
-                            paymentAmount,
-                            interestRate
-                    );
+                }
+                else if (loanButton.isChecked()) {
+                    try {
+                        Loan loan = new Loan(
+                                accountNumber,
+                                initialbalance,
+                                currentBalance,
+                                paymentAmount,
+                                interestRate
+                        );
 
-                    LoanData loanData = new LoanData(MainActivity.this);
-                    loanData.open();
-                    loanData.insertVals(loan);
-                    loanData.close();
+                        LoanData loanData = new LoanData(MainActivity.this);
+                        loanData.open();
+                        loanData.insertVals(loan);
+                        loanData.close();
+                        alert();
+                        clearText();
+                    } catch (Exception e) {
 
-                } else if (checkingButton.isChecked()){
-                    CheckingAccount checkingAccount = new CheckingAccount(
-                            accountNumber,
-                            currentBalance
-                    );
+                    }
+                }
+                else if (checkingButton.isChecked()){
+                    try {
+                        CheckingAccount checkingAccount = new CheckingAccount(
+                                accountNumber,
+                                currentBalance
+                        );
 
-                    CheckingData checkingData = new CheckingData(MainActivity.this);
-                    checkingData.open();
-                    checkingData.insertVals(checkingAccount);
-                    checkingData.close();
+                        CheckingData checkingData = new CheckingData(MainActivity.this);
+                        checkingData.open();
+                        checkingData.insertVals(checkingAccount);
+                        checkingData.close();
+                        alert();
+                        clearText();
+                    } catch (Exception e) {
+
+                    }
                 }
             }
         });
@@ -187,20 +203,40 @@ public class MainActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /// Text Fields
-                EditText accountNumberField = findViewById(R.id.accountNumberEditText);
-                EditText initialBalanceField = findViewById(R.id.initialBalanceEditText);
-                EditText currentBalanceField = findViewById(R.id.currentBalanceEditText);
-                EditText interestRateField = findViewById(R.id.interestRateEditText);
-                EditText paymentAmountField = findViewById(R.id.paymentAmountEditText);
-
-                accountNumberField.setText("");
-                initialBalanceField.setText("");
-                currentBalanceField.setText("");
-                interestRateField.setText("");
-                paymentAmountField.setText("");
+                clearText();
             }
         });
+    }
+
+    public void clearText(){
+        /// Text Fields
+        EditText accountNumberField = findViewById(R.id.accountNumberEditText);
+        EditText initialBalanceField = findViewById(R.id.initialBalanceEditText);
+        EditText currentBalanceField = findViewById(R.id.currentBalanceEditText);
+        EditText interestRateField = findViewById(R.id.interestRateEditText);
+        EditText paymentAmountField = findViewById(R.id.paymentAmountEditText);
+
+        accountNumberField.setText("");
+        initialBalanceField.setText("");
+        currentBalanceField.setText("");
+        interestRateField.setText("");
+        paymentAmountField.setText("");
+    }
+
+
+
+    public void alert(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        alert.setMessage("Saved Data in Database!");
+        alert.setNeutralButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        alert.create();
+        alert.show();
     }
 
 }
