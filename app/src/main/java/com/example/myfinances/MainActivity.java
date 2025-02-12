@@ -163,6 +163,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    void cancelButtonInnit() {
+        Button cancelButton = findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /// Text Fields
+                EditText accountNumberField = findViewById(R.id.accountNumberEditText);
+                EditText initialBalanceField = findViewById(R.id.initialBalanceEditText);
+                EditText currentBalanceField = findViewById(R.id.currentBalanceEditText);
+                EditText interestRateField = findViewById(R.id.interestRateEditText);
+                EditText paymentAmountField = findViewById(R.id.paymentAmountEditText);
 
+                accountNumberField.setText("");
+                initialBalanceField.setText("");
+                currentBalanceField.setText("");
+                interestRateField.setText("");
+                paymentAmountField.setText("");
+            }
+        });
+    }
 
 }
