@@ -17,6 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.myfinances.databases.CdDb;
 import com.example.myfinances.databases.CheckingDb;
 import com.example.myfinances.databases.LoanDb;
+import com.example.myfinances.helpers.CdData;
+import com.example.myfinances.helpers.CheckingData;
+import com.example.myfinances.helpers.LoanData;
 import com.example.myfinances.models.Cd;
 import com.example.myfinances.models.CheckingAccount;
 import com.example.myfinances.models.Loan;
@@ -26,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         initState();
         radioGroupOnChange();
@@ -42,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initState(){
-        RadioButton cdButton = findViewById(R.id.cdRadio);
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
         EditText paymentAmountField = findViewById(R.id.paymentAmountEditText);
-        cdButton.setChecked(true);
+        radioGroup.check(R.id.cdRadio);
         paymentAmountField.setEnabled(false);
     }
 
@@ -111,11 +113,26 @@ public class MainActivity extends AppCompatActivity {
                 EditText paymentAmountField = findViewById(R.id.paymentAmountEditText);
 
                 /// Extracted Vals
-                int accountNumber = Integer.parseInt(accountNumberField.getText().toString());
-                double initialbalance = Double.parseDouble(initialBalanceField.getText().toString());
-                double currentBalance = Double.parseDouble(currentBalanceField.getText().toString());
-                double interestRate = Double.parseDouble(interestRateField.getText().toString());
-                double paymentAmount = Double.parseDouble(paymentAmountField.getText().toString());
+                int accountNumber = 0;
+                if (!accountNumberField.getText().toString().isEmpty()){
+                    accountNumber = Integer.parseInt(accountNumberField.getText().toString());
+                }
+                double initialbalance = 0.0;
+                if (!initialBalanceField.getText().toString().isEmpty()) {
+                     initialbalance = Double.parseDouble(initialBalanceField.getText().toString());
+                }
+                double currentBalance = 0.0;
+                if (!currentBalanceField.getText().toString().isEmpty()){
+                    currentBalance = Double.parseDouble(currentBalanceField.getText().toString());
+                }
+                double interestRate = 0.0;
+                if (!interestRateField.getText().toString().isEmpty()){
+                    interestRate = Double.parseDouble(interestRateField.getText().toString());
+                }
+                double paymentAmount = 0.0;
+                if (!paymentAmountField.getText().toString().isEmpty()) {
+                    paymentAmount = Double.parseDouble(paymentAmountField.getText().toString());
+                }
 
                 /// Value insert
                 if (cdButton.isChecked()){
@@ -127,11 +144,12 @@ public class MainActivity extends AppCompatActivity {
                                 interestRate
                         );
                         /// Handles data management (inserts)
-                        CdDb cdDbHelper = new CdDb(MainActivity.this);
+                        CdData cdData = new CdData(MainActivity.this);
 
-                        cdDbHelper.open();
-                        cdDbHelper.insertVals(cd);
-                        cdDbHelper.close();
+                        cdData.open();
+                        cdData.insertVals(cd);
+                        cdData.close();
+
                     } catch (Exception e) {
                         System.out.println("Error with cd db");
                     }
@@ -144,10 +162,10 @@ public class MainActivity extends AppCompatActivity {
                             interestRate
                     );
 
-                    LoanDb loanDb = new LoanDb(MainActivity.this);
-                    loanDb.open();
-                    loanDb.insertVals(loan);
-                    loanDb.close();
+                    LoanData loanData = new LoanData(MainActivity.this);
+                    loanData.open();
+                    loanData.insertVals(loan);
+                    loanData.close();
 
                 } else if (checkingButton.isChecked()){
                     CheckingAccount checkingAccount = new CheckingAccount(
@@ -155,10 +173,10 @@ public class MainActivity extends AppCompatActivity {
                             currentBalance
                     );
 
-                    CheckingDb checkingDb = new CheckingDb(MainActivity.this);
-                    checkingDb.open();
-                    checkingDb.insertVals(checkingAccount);
-                    checkingDb.close();
+                    CheckingData checkingData = new CheckingData(MainActivity.this);
+                    checkingData.open();
+                    checkingData.insertVals(checkingAccount);
+                    checkingData.close();
                 }
             }
         });

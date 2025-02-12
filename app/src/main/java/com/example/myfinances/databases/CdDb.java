@@ -1,12 +1,9 @@
 package com.example.myfinances.databases;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.myfinances.models.Cd;
 
 public class CdDb extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "myFinance.db";
@@ -32,5 +29,4 @@ public class CdDb extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS cd");
         onCreate(sqLiteDatabase);
     }
-}
 }
